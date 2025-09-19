@@ -1,9 +1,9 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react-swc';
-import path from 'path';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react-swc'
+import path from 'path'
 
 // If VITE_BASE is set (used in build:gh), use it; otherwise default to "/"
-const basePath = process.env.VITE_BASE || '/';
+const basePath = process.env.VITE_BASE || '/'
 
 export default defineConfig({
   plugins: [react()],
@@ -62,16 +62,20 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (id.includes('react')) return 'vendor.react';
-            return 'vendor';
+            if (id.includes('react')) return 'vendor.react'
+            return 'vendor'
           }
         },
       },
     },
   },
 
+  optimizeDeps: {
+    include: ['react', 'react-dom'],
+  },
+
   server: {
     port: 3000,
     open: true,
   },
-});
+})
